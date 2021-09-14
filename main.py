@@ -7,13 +7,13 @@ import threading
 config = json.load(open('./config.json', 'r'))
 elements = config['elements-classes'][0]
 
-# options = webdriver.FirefoxOptions()
-# options.headless = True
+options = webdriver.FirefoxOptions()
+options.headless = True
 
 def join_bot(username, t_no):
     print(f"Now starting Thread No. {t_no}")
 
-    driver = webdriver.Firefox(executable_path="./geckodriver.exe")
+    driver = webdriver.Firefox(executable_path="./geckodriver.exe", options=options)
 
     driver.get(config['join_url'])
 
@@ -33,7 +33,21 @@ def join_bot(username, t_no):
 
     time.sleep(3)
 
-    username_field = driver.find_element_by_class_name(elements['username-input'])
+
+    try:
+        username_field = driver.find_element_by_class_name(elements['username-input'])
+    except:
+        if driver.current_url == "https://quizizz.com/join":
+            print("Unable to access next page in schedule.")
+            driver.close()
+        try:
+            time.sleep(3)
+            username_field = driver.find_element_by_class_name(
+                elements['username-input'])
+        except:
+            print("Unable to go to next page.")
+            driver.close()
+            
 
     username_field.send_keys( "%s" % (username) )
 
@@ -53,12 +67,10 @@ def join_bot(username, t_no):
 
     find_existing_username_override()
 
-    time.sleep(config['maximum-minutes'] * 60) # Convert into minutes.
-
     print('[SUCCESS MESSAGE] Added bot to game.')
 
-    time.sleep()
-
+    time.sleep(config['maximum-minutes'] * 60) # Convert into minutes.
+    
     driver.close()
 
 def join_bots(amount):
