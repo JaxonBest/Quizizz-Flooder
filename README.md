@@ -9,8 +9,14 @@
 Inside the windows powershell type the following commands line by line.
 
 ```
-git clone https://github.com/M3Horizun/Quizizz-Flooder quizizz-flooder# <- Must have git installed
+git clone https://github.com/M3Horizun/Quizizz-Flooder quizizz-flooder # <- Must have git installed
 ######
 cd quizizz-flooder
+######
+notepad config.json # <- In here you edit the options to your preference.
+######
+python3 -m pip install -r requirements.txt
+######
+python3 main.py
 ######
 ```
