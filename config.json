@@ -1,0 +1,18 @@
+{
+  "pin": "434788",
+  "username-prefix": "ninvm tester ",
+  "maximum-minutes": 5,
+  "amount_of_bots": 20,
+
+
+  "join_url": "https://quizizz.com/join",
+  "elements-classes": [
+    {
+      "input-box": "check-room-input",
+      "join-btn": "check-room-button",
+      "username-input": "enter-name-field",
+      "start-btn": "start-game",
+      "override_username_yes": "button make-uppercase confirm"
+    }
+  ]
+}
